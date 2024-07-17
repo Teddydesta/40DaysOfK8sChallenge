@@ -1,0 +1,131 @@
+#40DaysOfK8sChallenge
+Day 2/40: How to Dockerize a Project
+Teddy Desta
+Teddy Desta
+
+5 min read
+·
+1 day ago
+2
+
+
+
+
+
+
+In my previous challenge of #40DaysOfKubernetes Challenge! prepared by https://www.linkedin.com/in/piyush-sachdeva, we have explored the differences between traditional methods of building and promoting applications and Docker’s modern approach.
+
+In this article, we are gonna explore dockerizing your application. Dockerizing your Todo app will provide a consistent and reliable way to deploy and manage your application across different environments. It will streamline your development workflow, improve scalability, and make your application easier to maintain and distribute. In the following sections, we will dive into each step of the Dockerization process, providing detailed instructions and examples to help you get started.
+
+Key Steps:
+
+Clone the Repository: Get the sample application code.
+Create a Dockerfile: Define the container environment for your app.
+Build Docker Images: Generate images from your Dockerfile.
+Tag and Push Images: Prepare and upload your images to Docker Hub.
+Verify and Pull Images: Ensure your images are on Docker Hub and download them to different environments.
+Run Containers: Start your application using Docker commands.
+Interact and Monitor: Use docker exec to run commands inside containers and docker logs to view application output.
+Prerequisites
+Before you start, ensure that you have the following installed on your machine:
+
+Docker: Follow the official Docker installation guide to install Docker, 👉 https://www.docker.com/products/docker-desktop/
+
+Steps to Dockerize the Todo App
+Clone a sample git repository
+Before moving to another step we need to have an application in our local machine so, download using the below link
+
+git clone https://github.com/docker/getting-started-app.git
+
+2. Create a Dockerfile: A Dockerfile is a text document that contains all the commands to assemble an image.
+
+In order to create a dockerfile first jump in to the application directory like the following: —
+
+cd getting-started-app/
+
+Then, Create an empty file with the name Dockerfile under the parent directory
+
+//for Linux OS
+touch Dockerfile
+
+//for Windows power shell
+New-Item -Path . -Name "Dockerfile" -ItemType "File" -Force
+After Craeting the file, using text editor of your chice copy and paste the following docker file script…
+
+# Use the official Node.js image based on Alpine Linux version 3.19
+FROM node:22-alpine3.19 
+
+# Set the working directory inside the container to /app
+WORKDIR /app
+
+# Copy all files from the current directory on the host machine to the /app directory in the container
+COPY . .
+
+# Install only the production dependencies using yarn
+RUN yarn install --production
+
+# Specify the command to run the application, starting the Node.js process and running the main script
+CMD ["node", "src/index.js"]
+
+# Inform Docker that the container will listen on port 5000 at runtime
+EXPOSE 5000
+3. Build Docker Images: Using the Dockerfiles, we will build Docker images for each part of our application. These images are templates for creating containers.
+
+To build the docker image use the following command:
+
+docker build -t day02-todo-app .
+
+To make sure if the image is been created
+
+docker images
+4. Tag and Push Images:
+
+You need to tag your Docker images with your Docker Hub repository name before you can push them. Replace username with your Docker Hub username and repo with your desired repository name.
+
+docker tag day02-todo-app:latest username/repo:<tagname>
+
+Push the Images to Docker Hub
+
+Use the docker push command to push your images to Docker Hub, but before pushing, you have to login to docker as well 😊, If the credential is corect you will see a message “login succeeded”
+
+
+docker push username/repo:<tagname>
+5. Verify and Pull Images:
+
+After pushing the images, you can verify that they have been uploaded successfully by logging into your Docker Hub account and navigating to your repositories.
+
+
+Pull the Docker Image
+
+To pull the image to another environment , you can use below command
+
+docker pull username/repo:<tagname>
+
+6. Run Containers:
+
+To start your Docker containers, use the docker run command if you are managing individual containers.
+
+docker run -dp 5000:5000 username/new-repo:<tagname>
+
+Open a web browser to navigate to http://localhost:5000 and test your Application if it run successfully.
+
+
+7. Interact and Monitor:
+
+Run a Docker commands inside a running Docker container
+
+The docker exec command allows you to run commands inside a running Docker container. This can be useful for debugging, inspecting, or interacting with your containerized application.
+
+To enter(exec) into the container, use the below command
+docker exec -it <container_name> sh
+
+View docker logs
+
+The docker logs command allows you to view the logs generated by a running Docker container. This is useful for monitoring the output of your application and debugging issues.
+
+To view docker logs, use the below command
+docker logs <container_name>
+
+Thank you for following along! 🙏😊. This is Day Two of my Dockerization journey. Stay tuned for the upcoming series of articles where we will continue to delve deeper into Kubernetes and containerization.
+
+Resources: — https://youtu.be/ul96dslvVwY?si=cI1-pFvnwjP51Fjh
