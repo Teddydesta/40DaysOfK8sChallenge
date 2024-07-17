@@ -1,16 +1,5 @@
 #40DaysOfK8sChallenge
 Day 2/40: How to Dockerize a Project
-Teddy Desta
-Teddy Desta
-
-5 min read
-·
-1 day ago
-2
-
-
-
-
 
 
 In my previous challenge of #40DaysOfKubernetes Challenge! prepared by https://www.linkedin.com/in/piyush-sachdeva, we have explored the differences between traditional methods of building and promoting applications and Docker’s modern approach.
