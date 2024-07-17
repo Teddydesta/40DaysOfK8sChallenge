@@ -1,15 +1,5 @@
 #40DaysOfK8sChallenge
 Day 3/40 — Multi Stage Docker Builduction
-Teddy Desta
-Teddy Desta
-
-6 min read
-·
-13 hours ago
-
-
-
-
 
 In the previous challenge of the #40DaysOfKubernetes Challenge! prepared by Piyush Sachdeva, we explored the process of Dockerizing a project. Today, we will take it a step further by creating a multi-stage Docker build. This method allows us to separate the build environment from the runtime environment, resulting in leaner and more efficient Docker images. In this article, we will guide you through each step of the multi-stage Docker build process.
 
