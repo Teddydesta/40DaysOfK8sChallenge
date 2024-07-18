@@ -86,12 +86,14 @@ To build the docker image use the bellow command:
 
 `docker build -t todoapp-docker .
 `
+
 6. **Verify the Image**
 
 Verify the image has been created and stored locally:
 
 `docker images
 `
+
 **7. Push the Image to Docker Hub**
 
 Use the docker push command to push your images to Docker Hub, but before pushing, you have to login to docker as well 😊, If the credential is corect you will see a message “**login succeeded**”
@@ -118,6 +120,7 @@ To start your Docker containers, use the docker run command if you are managing 
 
 `docker run -dp 3000:3000 username/remote-repo:<tagname>
 `
+
 Verify your app. If you have followed the above steps correctly, your app should be listening on localhost:3000, just open a web browser to navigate to http://localhost:5000 and test your Application if it run successfully. **Here we go** 👉
 
 
