@@ -1,158 +1,137 @@
 ### #40DaysOfK8sChallenge
-**Day 3/40 — Multi Stage Docker Builduction**
+**Day 2/40: How to Dockerize a Project**
 
-In the previous challenge of the #40DaysOfKubernetes Challenge! prepared by Piyush Sachdeva, we explored the process of Dockerizing a project. Today, we will take it a step further by creating a multi-stage Docker build. This method allows us to separate the build environment from the runtime environment, resulting in leaner and more efficient Docker images. In this article, we will guide you through each step of the multi-stage Docker build process.
 
-**Key Steps**
+In my previous challenge of #40DaysOfKubernetes Challenge! prepared by **https://www.linkedin.com/in/piyush-sachdeva**, we have explored the differences between traditional methods of building and promoting applications and Docker’s modern approach.
+
+In this article, we are gonna explore dockerizing your application. Dockerizing your Todo app will provide a consistent and reliable way to deploy and manage your application across different environments. It will streamline your development workflow, improve scalability, and make your application easier to maintain and distribute. In the following sections, we will dive into each step of the Dockerization process, providing detailed instructions and examples to help you get started.
+
+**Key Steps:**
 
 - Clone the Repository: Get the sample application code.
-- Navigate to the Directory: Change into the cloned repository directory.
 - Create a Dockerfile: Define the container environment for your app.
 - Build Docker Images: Generate images from your Dockerfile.
 - Tag and Push Images: Prepare and upload your images to Docker Hub.
-- Pull the Image: Download the image to different environments.
+- Verify and Pull Images: Ensure your images are on Docker Hub and download them to different environments.
 - Run Containers: Start your application using Docker commands.
 - Interact and Monitor: Use docker exec to run commands inside containers and docker logs to view application output.
-- Clean Up Old Images: Remove unused Docker images from the local repository.
 
 **Prerequisites**
-
 Before you start, ensure that you have the following installed on your machine:
 
-**Docker**: Follow the official Docker installation guide to install Docker.
-Steps to Create a Multi-Stage Docker Build
+**Docker**: Follow the official Docker installation guide to install Docker, 👉 https://www.docker.com/products/docker-desktop/
 
-1. Clone the Sample Repository
-Clone the below sample repository, or you can use any web application that you have:
+### Steps to Dockerize the Todo App
+**1. Clone a sample git repository**
+Before moving to another step we need to have an application in our local machine so, download using the below link
 
-`git clone https://github.com/piyushsachdeva/todoapp-docker.git
-`
-2. Navigate to the Directory
-
-Change into the repository directory:
-`cd todoapp-docker/
+`git clone https://github.com/docker/getting-started-app.git
 `
 
-3. Create a Dockerfile
+**2. Create a Dockerfile: A Dockerfile is a text document that contains all the commands to assemble an image.**
 
-A Dockerfile is a text document that contains all the commands to assemble an image.
+In order to create a dockerfile first jump in to the application directory like the following: —
 
-After navigated to the repository directory, then create an empty file with the name Dockerfile under the parent directory, using below command: —
+`cd getting-started-app/
+`
+
+Then, Create an empty file with the name Dockerfile under the parent directory
 
 ```
-//for Linux terminal
+//for Linux OS
 touch Dockerfile
 
 //for Windows power shell
 New-Item -Path . -Name "Dockerfile" -ItemType "File" -Force
 ```
 
-I have an empty file called “Dockerfile” in my parent application directory like below: —
+After Craeting the file, using text editor of your chice copy and paste the following docker file script…
 
+```
+# Use the official Node.js image based on Alpine Linux version 3.19
+FROM node:22-alpine3.19 
 
-4. Add Dockerfile Content
-
-After Craeting the “Dockerfile” file, Using the text editor of your choice, paste the below content into the Dockerfile:
-
-# Uses the Node.js 22 Alpine image for a lightweight build environment
-FROM node:22-alpine3.19 AS installer
-# Sets the working directory inside the container to /app
+# Set the working directory inside the container to /app
 WORKDIR /app
 
-# Copies the package files to the working directory.
-COPY package*.json ./
-
-# Installs the dependencies defined in the package files.
-RUN npm install 
-
-# Copies the entire application code to the working directory
+# Copy all files from the current directory on the host machine to the /app directory in the container
 COPY . .
 
-# Builds the application
-RUN npm run build
+# Install only the production dependencies using yarn
+RUN yarn install --production
 
-# Uses the latest Nginx image for serving the built application.
-FROM nginx:latest AS deployer
+# Specify the command to run the application, starting the Node.js process and running the main script
+CMD ["node", "src/index.js"]
 
-# Copies the built files from the installer stage to the Nginx default directory for serving static files.
-COPY --from=installer /app/build /usr/share/nginx/html
+# Inform Docker that the container will listen on port 5000 at runtime
+EXPOSE 5000
+```
 
-5. Build the Docker Image
+**3. Build Docker Images: Using the Dockerfiles, we will build Docker images for each part of our application. These images are templates for creating containers.**
 
-Using the Dockerfiles, we will build Docker images for each part of our application. These images are templates for creating containers.
+To build the docker image use the following command:
 
-To build the docker image use the bellow command:
+`docker build -t day02-todo-app .
+`
 
-docker build -t todoapp-docker .
+To make sure if the image is been created
 
-6. Verify the Image
+`docker images
+`
 
-Verify the image has been created and stored locally:
+**4. Tag and Push Images:**
 
-docker images
+You need to tag your Docker images with your Docker Hub repository name before you can push them. Replace username with your Docker Hub username and repo with your desired repository name.
 
-7. Push the Image to Docker Hub
+`docker tag day02-todo-app:latest username/repo:<tagname>
+`
+
+**Push the Images to Docker Hub**
 
 Use the docker push command to push your images to Docker Hub, but before pushing, you have to login to docker as well 😊, If the credential is corect you will see a message “login succeeded”
 
-docker login
-docker tag todoapp-docker:latest username/remote-repo:tagname
-docker images
-docker push username/remote-repo:tagname
+`docker push username/repo:<tagname>
+`
+
+**5. Verify and Pull Images:**
 
 After pushing the images, you can verify that they have been uploaded successfully by logging into your Docker Hub account and navigating to your repositories.
 
 
-8. Pull the Image to Another Environment
+**Pull the Docker Image**
 
 To pull the image to another environment , you can use below command
 
-docker pull username/remote-repo:<tagname>
+`docker pull username/repo:<tagname>
+`
 
-9. Run the Docker Container
+**6. Run Containers:**
 
 To start your Docker containers, use the docker run command if you are managing individual containers.
 
-docker run -dp 3000:3000 username/remote-repo:<tagname>
+`docker run -dp 5000:5000 username/new-repo:<tagname>
+`
 
-Verify your app. If you have followed the above steps correctly, your app should be listening on localhost:3000, just open a web browser to navigate to http://localhost:5000 and test your Application if it run successfully. Here we go 👉
+Open a web browser to navigate to http://localhost:5000 and test your Application if it run successfully.
 
+**7. Interact and Monitor:**
 
-10. Interact and Monitor: Run a Docker commands inside a running docker container.
+Run a Docker commands inside a running Docker container
 
-Docker Exec Command
 The docker exec command allows you to run commands inside a running Docker container. This can be useful for debugging, inspecting, or interacting with your containerized application.
 
 To enter(exec) into the container, use the below command
+`docker exec -it <container_name> sh
+`
 
-docker exec -it <containername> sh     
-//or
-docker exec -it <containerid> sh
+**View docker logs**
 
-View Docker Logs
 The docker logs command allows you to view the logs generated by a running Docker container. This is useful for monitoring the output of your application and debugging issues.
 
-To view docker logs, use the below command: -
+To view docker logs, use the below command
+`docker logs <container_name>
+`
 
-docker logs <containername>
+**Thank you for following along!** 🙏😊. This is Day Two of my Dockerization journey. Stay tuned for the upcoming series of articles where we will continue to delve deeper into Kubernetes and containerization.
 
-//or
-
-docker logs <containerid>
-
-Inspect The Docker Container
-docker inspect is a powerful Docker CLI command that provides detailed information about Docker objects such as containers, images, volumes, and networks. This command outputs JSON-formatted data, making it useful for obtaining comprehensive insights into various aspects of Docker objects.
-
-To view the content of the Docker container, use the below command: -
-
-docker inspect <container_id_or_name>
-
-11. Clean up old Docker images from the local repository:
-
-docker image rm image-id
-Summary
-In this challenge, we successfully created a multi-stage Docker build process. We started by cloning a sample repository, created a Dockerfile with multi-stage builds, built and verified the Docker image, and then pushed it to Docker Hub. Additionally, we explored how to pull the image to another environment, run the Docker container, and perform various management tasks such as viewing logs, inspecting containers, and cleaning up old images. This multi-stage build approach helps in creating optimized and secure Docker images suitable for production environments.
-
-Thank you for following along! 🙏😊 This is Day Three of my Dockerization journey. Stay tuned for the upcoming series of articles where we will continue to delve deeper into Kubernetes and containerization.
-
-Resources: Watch this video for more details
+**Resources**: — https://youtu.be/ul96dslvVwY?si=cI1-pFvnwjP51Fjh
