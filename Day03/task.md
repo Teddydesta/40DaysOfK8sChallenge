@@ -27,7 +27,8 @@ Clone the below sample repository, or you can use any web application that you h
 
 `git clone https://github.com/piyushsachdeva/todoapp-docker.git
 `
-2. **Navigate to the Directory**
+
+**2. Navigate to the Directory**
 
 Change into the repository directory:
 `cd todoapp-docker/
@@ -87,7 +88,7 @@ To build the docker image use the bellow command:
 `docker build -t todoapp-docker .
 `
 
-6. **Verify the Image**
+**6. Verify the Image**
 
 Verify the image has been created and stored locally:
 
