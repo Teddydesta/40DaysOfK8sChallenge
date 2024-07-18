@@ -115,6 +115,7 @@ To pull the image to another environment , you can use below command
 
 `docker pull username/remote-repo:<tagname>
 `
+
 **9. Run the Docker Container**
 
 To start your Docker containers, use the docker run command if you are managing individual containers.
@@ -158,6 +159,7 @@ To view the content of the Docker container, use the below command: -
 
 `docker inspect <container_id_or_name>
 `
+
 **11. Clean up old Docker images from the local repository:**
 
 `docker image rm image-id
