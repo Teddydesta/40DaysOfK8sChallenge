@@ -1,45 +1,52 @@
-#40DaysOfK8sChallenge
-Day 3/40 — Multi Stage Docker Builduction
+### #40DaysOfK8sChallenge
+**Day 3/40 — Multi Stage Docker Builduction**
 
 In the previous challenge of the #40DaysOfKubernetes Challenge! prepared by Piyush Sachdeva, we explored the process of Dockerizing a project. Today, we will take it a step further by creating a multi-stage Docker build. This method allows us to separate the build environment from the runtime environment, resulting in leaner and more efficient Docker images. In this article, we will guide you through each step of the multi-stage Docker build process.
 
-Key Steps
-Clone the Repository: Get the sample application code.
-Navigate to the Directory: Change into the cloned repository directory.
-Create a Dockerfile: Define the container environment for your app.
-Build Docker Images: Generate images from your Dockerfile.
-Tag and Push Images: Prepare and upload your images to Docker Hub.
-Pull the Image: Download the image to different environments.
-Run Containers: Start your application using Docker commands.
-Interact and Monitor: Use docker exec to run commands inside containers and docker logs to view application output.
-Clean Up Old Images: Remove unused Docker images from the local repository.
-Prerequisites
+**Key Steps**
+
+- Clone the Repository: Get the sample application code.
+- Navigate to the Directory: Change into the cloned repository directory.
+- Create a Dockerfile: Define the container environment for your app.
+- Build Docker Images: Generate images from your Dockerfile.
+- Tag and Push Images: Prepare and upload your images to Docker Hub.
+- Pull the Image: Download the image to different environments.
+- Run Containers: Start your application using Docker commands.
+- Interact and Monitor: Use docker exec to run commands inside containers and docker logs to view application output.
+- Clean Up Old Images: Remove unused Docker images from the local repository.
+
+**Prerequisites**
 
 Before you start, ensure that you have the following installed on your machine:
 
-Docker: Follow the official Docker installation guide to install Docker.
+**Docker**: Follow the official Docker installation guide to install Docker.
 Steps to Create a Multi-Stage Docker Build
-Clone the Sample Repository
+
+1. Clone the Sample Repository
 Clone the below sample repository, or you can use any web application that you have:
 
-git clone https://github.com/piyushsachdeva/todoapp-docker.git
-
+`git clone https://github.com/piyushsachdeva/todoapp-docker.git
+`
 2. Navigate to the Directory
 
 Change into the repository directory:
+`cd todoapp-docker/
+`
 
-cd todoapp-docker/
 3. Create a Dockerfile
 
 A Dockerfile is a text document that contains all the commands to assemble an image.
 
 After navigated to the repository directory, then create an empty file with the name Dockerfile under the parent directory, using below command: —
 
+```
 //for Linux terminal
 touch Dockerfile
 
 //for Windows power shell
 New-Item -Path . -Name "Dockerfile" -ItemType "File" -Force
+```
+
 I have an empty file called “Dockerfile” in my parent application directory like below: —
 
 
