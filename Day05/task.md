@@ -1,4 +1,5 @@
-### #40DaysK8sChallenge Day 5/40: Mastering Kubernetes: Control Plane & Node Components 🚀
+### #40DaysK8sChallenge 
+### Day 5/40: Mastering Kubernetes: Control Plane & Node Components 🚀
 
 ### Introduction
  Welcome to Day 5 of the #40DaysOfKubernetes Challenge! which is Prapared by https://www.linkedin.com/in/piyush-sachdeva/ Today, we dive into the heart of Kubernetes: the control plane and node components. Understanding these core elements is essential for mastering Kubernetes and effectively deploying and managing containerized applications. We will explore the vital roles these components play in ensuring the scalability, reliability, and efficiency of your Kubernetes cluster.
@@ -60,4 +61,4 @@ Understanding the control plane and node components is crucial for mastering Kub
 
 **Thank you for following along!** 🙏😊 This is Day Five of my Kubernetes journey. Stay tuned for the upcoming articles where we will continue to explore the powerful capabilities of Kubernetes and containerization.
 
-Resources: — For more detail
+Resources: — https://www.youtube.com/watch?v=SGGkUCctL4I&list=PLl4APkPHzsUUOkOv3i62UidrLmSB8DcGC&index=7
