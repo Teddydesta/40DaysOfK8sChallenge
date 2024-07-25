@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ReplicaSet
+metadata: 
+  name: nginx-rc
+  labels: 
+    env: demo
+spec: 
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+  replicas: 3
+  selector: 
+    matchLebels:
+      env: demo
