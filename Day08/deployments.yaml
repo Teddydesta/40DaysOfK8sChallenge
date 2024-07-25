@@ -1,11 +1,11 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata: 
-  name: nginx-rs
+  name: nginx-deploy
   labels: 
     env: demo
 spec: 
-  replicas: 5
+  replicas: 3
   selector:
     matchLabels:
       env: demo
@@ -18,4 +18,12 @@ spec:
       containers:
         - name: nginx
           image: nginx
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "64"
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+        
   
