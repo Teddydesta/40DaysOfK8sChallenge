@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-08-15T08:47:39Z"
+  labels:
+    run: nginx
+  name: nginx
+  namespace: default
+  resourceVersion: "105550"
+  uid: fefc9fa2-1462-4488-8f89-f971745c896b
+spec:
+  containers:
+  - image: nginx
+    imagePullPolicy: Always
+    name: nginx
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
