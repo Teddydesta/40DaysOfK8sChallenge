@@ -3,18 +3,17 @@ kind: Pod
 metadata:
   creationTimestamp: "2024-08-15T08:47:39Z"
   labels:
-    run: nginx
-    tier: frontend
-    type: app1
-  name: nginx
+    run: redis
+    tier: backend
+  name: redis
   namespace: default
   resourceVersion: "105550"
   uid: fefc9fa2-1462-4488-8f89-f971745c896b
 spec:
   containers:
-  - image: nginx
+  - image: redis
     imagePullPolicy: Always
-    name: nginx
+    name: redis
     resources:
       requests:
         memory: "64Mi"
