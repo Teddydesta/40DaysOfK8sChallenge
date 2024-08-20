@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod2
+  name: pod1
   labels:
-    env: dev
+    env: test
 spec:
   containers:
   - name: nginx
